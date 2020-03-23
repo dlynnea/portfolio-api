@@ -1,8 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const sendGrid = require('@sendGrid/mail');
 const app = express();
+const api_key = process.env.API_KEY;
 
 app.use(bodyParser.json());
 
@@ -19,8 +21,9 @@ app.get('/api', (req, res, next) => {
     res.send('API Status: Running')
 });
 
+
 app.post('/api/email', (req, res, next) => {
-    sendGrid.setApiKey('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')
+    sendGrid.setApiKey(api_key)
     const msg = {
         to: 'danimatton@gmail.com',
         from: req.body.email,
